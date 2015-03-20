@@ -3,8 +3,8 @@ var SongModel = Backbone.Model.extend({
   initialize: function() {
     if (window.localStorage && window.localStorage.songQueue) {
       var storage = JSON.parse(window.localStorage.songQueue);
-      if(storage[JSON.stringify(this)]) {
-        setTimeout(this.enqueue.bind(this), 0);
+      if(storage[JSON.stringify(this)] !== undefined) {
+        setTimeout(this.load.bind(this, storage[JSON.stringify(this)]), 0);
       }
     }
   },
@@ -21,6 +21,9 @@ var SongModel = Backbone.Model.extend({
   },
   dequeue: function() {
     this.trigger('dequeue', this);
-  }
+  },
+  load: function(index) {
+    this.trigger('load', index, this);
+  },
 
 });

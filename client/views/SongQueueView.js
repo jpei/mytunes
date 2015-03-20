@@ -13,8 +13,9 @@ var SongQueueView = Backbone.View.extend({
       this.$el.find('tr:contains(' + song.get("artist") + '):contains(' + song.get("title") + ')')
               .remove();
       if(this.model.at(0)===song) {
-        $('audio')[0].pause();
-        $('audio')[0].currentTime = 0;
+        var audio = $('audio')[0];
+        audio.pause();
+        audio.currentTime = 0;
         this.model.donePlaying();
       } else {
         this.model.remove(song);
