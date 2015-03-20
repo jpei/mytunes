@@ -2,11 +2,9 @@
 var SongModel = Backbone.Model.extend({
   initialize: function() {
     if (window.localStorage && window.localStorage.songQueue) {
-      var localStore = JSON.parse(window.localStorage.songQueue);
-      for(var i=0; i<localStore.length; i++) {
-        if(JSON.stringify(localStore[i]) === JSON.stringify(this) ){
-          setTimeout(this.enqueue.bind(this), 0);
-        }
+      var storage = JSON.parse(window.localStorage.songQueue);
+      if(storage[JSON.stringify(this)]) {
+        setTimeout(this.enqueue.bind(this), 0);
       }
     }
   },

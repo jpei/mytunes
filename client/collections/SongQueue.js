@@ -25,7 +25,12 @@ var SongQueue = Songs.extend({
   },
   save: function() {
     if (window.localStorage) {
-      window.localStorage.songQueue = JSON.stringify(this.toJSON());
+      var storage = {};
+      var songsJSON = this.toJSON();
+      for (var i=0; i<songsJSON.length; i++) {
+        storage[JSON.stringify(songsJSON[i])] = true;
+      }
+      window.localStorage.songQueue = JSON.stringify(storage);
     }
   },
 
